@@ -1,0 +1,47 @@
+zabbixSNMP-creator is python script with you can create
+Zabbix items template in xml format which then can be imported
+into system without manual work of creating items
+
+Necessary tools are:
+	libsmi >= 0.4.8 and
+	pysnmp >=pysnmp-4.1.10
+
+How to use it:
+
+First step is to create input file with use of snmpwalk utility
+
+snmpwalk -On -c public -v1 192.168.1.1 . > router.oids
+
+This will create "source" file for this script with all "walked" elements
+Please review this file for possible errors as some of values returned from
+snmp can be multiline - fix it to be single line.
+
+After that just follow script help 
+
+------------------------
+
+Usage: zabbixsnmp_creator.py [options]
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i FILENAME, --input-file=FILENAME
+                        File containing snmpwalked device 'oids=result'
+ mapped
+                        values
+  -o FILENAME, --output-file=FILENAME
+                        Output file where zabbix template will be written
+  -v, --verbose         very long names for items
+  -s SNMP_VERSION, --snmp-version=SNMP_VERSION
+                        don't print status messages to stdout
+  -c public, --community=public
+                        don't print status messages to stdout
+  -l SNMP_SECURITY_LEVEL, --snmp-security-level=SNMP_SECURITY_LEVEL
+                        SNMPv3 security level
+  -n SNMP_SECURITY_NAME, --snmp-security-name=SNMP_SECURITY_NAME
+                        SNMPv3 security name
+  -a SNMP_AUTH_PASSPHRASE, --snmp-auth-passphrase=SNMP_AUTH_PASSPHRASE
+                        SNMPv3 auth passphrase
+  -p SNMP_PRIV_PASSPHRASE, --snmp-priv-passphrase=SNMP_PRIV_PASSPHRASE
+                        SNMPv3 priv passphrase
+
